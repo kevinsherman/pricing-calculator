@@ -1,0 +1,64 @@
+{
+    "numberOfTeams": 10,
+    "dollarsPerTeam": 270,
+    "minimumBid": 1,
+    "useCustomSplit": false,
+    "hittersInput": {
+        "positions": [
+            {"key": "C", "value": 2},
+            {"key": "SS", "value":1},
+            {"key": "2B", "value":1},
+            {"key": "3B", "value":1},
+            {"key": "CF", "value":0},
+            {"key": "LF", "value":0},
+            {"key": "RF", "value":0},
+            {"key": "OF", "value":5},
+            {"key": "1B", "value":1},
+            {"key": "MI", "value":1},
+            {"key": "CI", "value":1},
+            {"key": "IF", "value":0},
+            {"key": "DH", "value":1}
+        ],
+        "minGames":[
+            {"key": "C", "value": 20},
+            {"key": "SS", "value":20},
+            {"key": "2B", "value":20},
+            {"key": "3B", "value":20},
+            {"key": "OF", "value":20},
+            {"key": "1B", "value":20},
+            {"key": "MI", "value":20},
+            {"key": "CI", "value":20},
+            {"key": "DH", "value":0}
+        ],
+        "categories": [
+                "HR",
+                "SB",
+                "R",
+                "RBI",
+                "OPS",
+                "AVG"
+        ],
+        "numberOfPlayersDrafted": 140
+    },
+    "pitchersInput": {
+        "positions": [
+            {"key": "SP", "value": 0},
+            {"key": "RP", "value": 0},
+            {"key": "P", "value": 10}
+        ],
+        "minGames": [
+            {"key": "SP", "value": 0},
+            {"key": "RP", "value": 0},
+            {"key": "P", "value": 1}
+        ],
+        "categories": [
+            "ERA",
+            "WHIP",
+            "IP",
+            "K",
+            "W",
+            "S"
+        ],
+        "numberOfPlayersDrafted": 100
+    }
+}

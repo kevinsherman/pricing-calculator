@@ -1,0 +1,35 @@
+{
+  "name": "@sablelab/pricing-calculator",
+  "version": "0.1.0",
+  "description": "Pricing Calculator for Fantasy Baseball using Standard Scores",
+  "main": "index.js",
+  "scripts": {
+    "start-once": "ts-node src/index.ts",
+    "start": "nodemon",
+    "test": "mocha -r ts-node/register src/tests/**/*.spec.ts",
+    "test:watch": "npm run test -- --watch-extensions ts --watch",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sablelab/pricing-calculator.git"
+  },
+  "author": "Kevin R. Sherman",
+  "license": "ISC",
+  "homepage": "https://github.com/sablelab/pricing-calculator#readme",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "ts-node": "^3.3.0"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.77",
+    "@types/node": "^8.0.34",
+    "lodash": "^4.11.2",
+    "typescript": "^2.5.3"
+  }
+}
