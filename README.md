@@ -8,25 +8,76 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-```
-Give examples
-```
+I plan on publishing a more detailed blog post on how the background and usage of this library (as well as it's roadmap), but here is quick Getting Started.
+
+This assumes that you already have Node and TypeScript installed.
 
 ### Installing
 
-Install via npm
+1. Create a new directory for a sample consumer application:
 
 ```
-Give the example
+mkdir sample && cd sample
 ```
 
-And repeat
+2. Create a node application
 
 ```
-until finished
+npm init -y
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+3. Install the pricing-calculator
+
+```
+npm install --save @sablelab/pricing-calculator
+```
+
+4. Create an index.js file
+
+```
+touch index.js
+```
+
+5. Create a directory to hold your sample data
+
+```
+makedir sample-data
+```
+
+6. Populuate the sample-data directory with the following input files. There are sample files in the gihub repository that you can use:
+* [batting projection file](https://github.com/sablelab/pricing-calculator/blob/master/src/tests/test-data/batting.json)
+* [pitching projection file](https://github.com/sablelab/pricing-calculator/blob/master/src/tests/test-data/pitching.json)
+* [input parameters file](https://github.com/sablelab/pricing-calculator/blob/master/src/tests/test-data/params.json)
+
+7. Use the sample files to calculate pricing:
+
+```
+var pricing = require('@sablelab/pricing-calculator');
+
+// use our sample data to generate the necessary inputs:
+var params = require('./sample-data/params.json');
+var batting = require('./sample-data/batting.json');
+var pitching = require('./sample-data/pitching.json');
+
+// create a new calculator with the inputs:
+var calc = new pricing.PriceCalculator(params, batting, pitching);
+
+// calculate the reponse:
+var response = calc.calculate();
+
+// inspect the response object to see all of the pricing information:
+console.log(`Batting Iterations: ${r.battersOutput.numberOfIterations}`);
+console.log(`Pitching Iterations: ${r.pitchersOutput.numberOfIterations}`);
+```
+
+8. Run the application to generate the response:
+```
+node index.js
+
+// output:
+Batting Iterations: 4
+Pitching Iterations: 3
+```
 
 ## Running the tests
 
