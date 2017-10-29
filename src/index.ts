@@ -44,7 +44,9 @@ export class PriceCalculator {
         var draftBudget = this.parameters.dollarsPerTeam * this.parameters.numberOfTeams;
         var totalNumberOfPlayers = this.parameters.hittersInput.numberOfPlayersDrafted + 
             this.parameters.pitchersInput.numberOfPlayersDrafted;
-        var marginalDollars = draftBudget - (totalNumberOfPlayers * this.parameters.minimumBid);
+
+        var marginalBatters = this.parameters.hittersInput.numberOfPlayersDrafted * this.parameters.minimumBid;
+        var marginalPitchers = this.parameters.pitchersInput.numberOfPlayersDrafted * this.parameters.minimumBid
 
         this.batters = _.orderBy(this.batters, x => x.adjTotal, ['desc']);
         this.pitchers = _.orderBy(this.pitchers, x => x.adjTotal, ['desc']);
@@ -55,20 +57,19 @@ export class PriceCalculator {
         var pointsDenominator = totalBattingPoints + totalPitchingPoints;
         var battingDollars: number;
         var pitchingDollars: number;
+        var battingRatio: number;
+        var pitchingRatio: number;
 
         if (this.parameters.useCustomSplit) {
-
-            battingDollars = this.parameters.hittersSplit * marginalDollars;
-            pitchingDollars = this.parameters.pitchersSplit * marginalDollars;
-
+            battingRatio = this.parameters.hittersSplit;
+            pitchingRatio = this.parameters.pitchersSplit;
         } else {
-
-            let battingRatio = totalBattingPoints / pointsDenominator;
-            let pitchingRatio = totalPitchingPoints / pointsDenominator;
-
-            battingDollars = battingRatio * marginalDollars;
-            pitchingDollars = pitchingRatio * marginalDollars;
+            battingRatio = totalBattingPoints / pointsDenominator;
+            pitchingRatio = totalPitchingPoints / pointsDenominator;
         }
+
+        battingDollars = battingRatio * draftBudget - marginalBatters;
+        pitchingDollars = pitchingRatio * draftBudget - marginalPitchers ;
 
         this.batters.forEach(function (p) {
             var points = p.adjTotal;
