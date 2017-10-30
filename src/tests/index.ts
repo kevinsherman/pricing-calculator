@@ -13,12 +13,11 @@ import * as XLSX from 'xlsx';
     console.log(`Batting Iterations: ${r.battersOutput.numberOfIterations}`);
     console.log(`Pitching Iterations: ${r.pitchersOutput.numberOfIterations}`);
 
-    console.log(process.cwd());
+    // console.log(process.cwd());
     var file = 'src/tests/test-data/validation/batting_validation.xlsx';
     var wb = XLSX.readFile(file);
     console.log(wb.Workbook.Sheets[0]);
 
-    
 })();
 
 // import * as json2csv from 'json2csv';
