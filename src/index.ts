@@ -28,7 +28,7 @@ export class PriceCalculator {
         
         this.calculateZScores();
         this.calculatePricing();
-        
+
         return this.response;
     }
 
