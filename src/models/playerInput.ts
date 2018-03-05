@@ -3,5 +3,6 @@ export interface playerInput {
     PlayerName: string,
     isAboveReplacement: boolean,
     pos: string[],
-    [index: string]: any
+    [index: string]: any,
+    total: number
 }

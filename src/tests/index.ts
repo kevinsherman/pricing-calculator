@@ -14,9 +14,9 @@ import * as XLSX from 'xlsx';
     console.log(`Pitching Iterations: ${r.pitchersOutput.numberOfIterations}`);
 
     // console.log(process.cwd());
-    var file = 'src/tests/test-data/validation/batting_validation.xlsx';
-    var wb = XLSX.readFile(file);
-    console.log(wb.Workbook.Sheets[0]);
+    // var file = 'src/tests/test-data/validation/batting_validation.xlsx';
+    // var wb = XLSX.readFile(file);
+    // console.log(wb.Workbook.Sheets[0]);
 
 })();
 
