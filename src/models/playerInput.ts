@@ -4,5 +4,6 @@ export interface playerInput {
     isAboveReplacement: boolean,
     pos: string[],
     [index: string]: any,
-    total: number
+    total: number,
+    adjTotal: number
 }

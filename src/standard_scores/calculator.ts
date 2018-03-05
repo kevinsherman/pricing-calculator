@@ -42,7 +42,7 @@ export class Calculator {
 
             this.calculateStandardScores();
 
-            this.players = _.orderBy(this.players, ['total'], ['desc']);
+            this.players = _.orderBy(this.players, (player) => player.total, ['desc']);
 
             if (i > 0) {
 
@@ -54,8 +54,8 @@ export class Calculator {
                 if (isSettled) {
                     // Step 2: Adjust for Replacement
                     this.output.replacementLevels = this.adjustForReplacementLevels();
-
-                    this.players = _.orderBy(this.players, ['adjTotal'], ['desc']);
+                    
+                    this.players = _.orderBy(this.players, (player) => player.adjTotal, ['desc']);
                 }
             }
 
