@@ -48,7 +48,7 @@ export class PriceCalculator {
         var marginalBatters = this.parameters.hittersInput.numberOfPlayersDrafted * this.parameters.minimumBid;
         var marginalPitchers = this.parameters.pitchersInput.numberOfPlayersDrafted * this.parameters.minimumBid
 
-        this.batters = _.orderBy(this.batters, (batter)=> batter.adjTotal, ['desc']);
+        this.batters = _.orderBy(this.batters, (player) => player.adjTotal, ['desc']);
         this.pitchers = _.orderBy(this.pitchers, (pitcher)=> pitcher.adjTotal, ['desc']);
 
         var totalBattingPoints = _(this.batters).filter(x => x.isAboveReplacement).sumBy(x => x.adjTotal);
@@ -71,7 +71,7 @@ export class PriceCalculator {
         battingDollars = battingRatio * draftBudget - marginalBatters;
         pitchingDollars = pitchingRatio * draftBudget - marginalPitchers ;
 
-        this.batters.forEach(function (p) {
+        this.batters.filter(x=>x.isAboveReplacement).forEach(function (p) {
             var points = p.adjTotal;
             p.dollarValue = (points / totalBattingPoints) * battingDollars + 1;
             points = -p.adjustment;

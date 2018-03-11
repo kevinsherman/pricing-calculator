@@ -1,6 +1,5 @@
 import { PriceCalculator } from "../index";
-import * as jsonexport from "jsonexport/dist";
-import * as fs from 'fs';
+import { toCsv } from "../common/helpers";
 
 (function testHarness() {
 
@@ -16,30 +15,4 @@ import * as fs from 'fs';
 
     toCsv(r.hitters, "hitters");
 
-
 })();
-
-
-
-export function toCsv(input: any[], fileName: string) {
-    var outFile = 'data/output/' + fileName;
-
-    jsonexport(input, function(err: any, csv: any) {
-        if (err) return console.log(err);
-        // console.log(csv);
-        fs.writeFile(outFile, csv, function(err) {
-            if (err) console.log(err);
-        })
-    })
-    
-    // fs.writeFile(outFile, csv, function (err) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    // })
-}
-    // fs.writeFile(outFile, csv, function (err) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    // })

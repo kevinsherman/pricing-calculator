@@ -9,6 +9,7 @@ import { battingInput } from '../models/battingInput';
 import { pitchingInput } from '../models/pitchingInput';
 import * as _ from 'lodash';
 import * as c from '../common/constants';
+import { toCsv } from '../common/helpers'; 
 
 export class Calculator {
 
@@ -28,9 +29,9 @@ export class Calculator {
 
         var isSettled = false;
 
-        this.statType === c.Batting ? 
+        this.statType === c.Batting ?
             this.buildBattingComponents() : this.buildPitchingComponents();
-        
+
         do {
 
             var i = this.output.numberOfIterations;
@@ -54,7 +55,7 @@ export class Calculator {
                 if (isSettled) {
                     // Step 2: Adjust for Replacement
                     this.output.replacementLevels = this.adjustForReplacementLevels();
-                    
+
                     this.players = _.orderBy(this.players, (player) => player.adjTotal, ['desc']);
                 }
             }
@@ -63,18 +64,21 @@ export class Calculator {
                 this.output.numberOfIterations++;
             }
         } while (!isSettled);
-        
+
         return this.output;
     }
 
     private adjustForReplacementLevels(): any {
-        
+
         var replacementLevels: any = {};
         var self = this;
 
         this.players.forEach(function (player) {
             player.isAboveReplacement = false;
         });
+
+        if (this.statType === "Batting")
+            toCsv(this.players, "before_replacement");
 
         var filteredPositions = this.input.positions.filter(x => x.value > 0);
 
@@ -103,18 +107,21 @@ export class Calculator {
         // Lastly, just need to set the adjustment and adjusted amount per player...
         filteredPositions.forEach(function (position) {
             var groupToAdjust = _(self.players)
-                .filter(item => (item.chosenPosition === position.key) ||  _.includes(item.pos, position.key) && !item.isAboveReplacement)
+                .filter(item => (item.chosenPosition === position.key ||  _.includes(item.pos, position.key) && !item.isAboveReplacement))
                 .value();
-            
+
             var adjustment: number = replacementLevels[position.key];
 
             groupToAdjust.forEach(function (player) {
                 player.adjustment = adjustment;
                 player.adjTotal = player.total - adjustment;
             })
-            
+
         })
-        
+
+        if (this.statType === "Batting")
+            toCsv(this.players, "after_adjustment");
+
         return replacementLevels;
     }
 
@@ -142,8 +149,8 @@ export class Calculator {
     }
 
     buildPitchingComponents() {
-        this.players.forEach(function(p) {
-            p.ip = p.outs/3;
+        this.players.forEach(function (p) {
+            p.ip = p.outs / 3;
             p.whip = p.ip === 0 ? 0 : (p.bb + p.h) / p.ip;
             p.era = p.ip === 0 ? 0 : 9 * p.er / p.ip;
         });
@@ -165,7 +172,7 @@ export class Calculator {
     getTotals() {
 
         var self = this;
-            
+
         this.players.forEach(function (player) {
             var total = 0;
             self.input.statCategories.forEach((item) => {
