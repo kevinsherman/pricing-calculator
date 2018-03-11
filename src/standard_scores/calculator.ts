@@ -92,7 +92,7 @@ export class Calculator {
                 .take(playersAtPosition)
                 .value();
 
-            replacementLevels[posKey] = thisGroup[playersAtPosition - 1].total;
+            replacementLevels[posKey] = 0; // thisGroup[playersAtPosition - 1].total;
 
             thisGroup.forEach(function (player) {
                 player.isAboveReplacement = true;

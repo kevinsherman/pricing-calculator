@@ -55,9 +55,7 @@ export class BattingExtensions {
 
         // 2. Calculate zScore of xAVG...
         var populationMean = totalValue / populationCount;
-        if (populationMean == 0) {
-            console.log("derp");
-        }
+
         this.calc.averages[this.calc.numberOfIterations].push({ key: "xAVG", value: populationMean });
 
         var sumOfSquaredDeviation = 0;

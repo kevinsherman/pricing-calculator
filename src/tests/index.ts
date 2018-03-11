@@ -22,7 +22,7 @@ import * as fs from 'fs';
 
 
 export function toCsv(input: any[], fileName: string) {
-    var outFile = 'data/output/' + fileName;
+    var outFile = 'data/output/' + fileName + '2.csv';
 
     jsonexport(input, function(err: any, csv: any) {
         if (err) return console.log(err);
