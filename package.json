@@ -6,6 +6,7 @@
   "scripts": {
     "start-once": "ts-node src/index.ts",
     "start": "nodemon",
+    "ts-test": "ts-node src/tests/index.ts",
     "test": "mocha -r ts-node/register src/tests/**/*.spec.ts",
     "test:watch": "npm run test -- --watch-extensions ts --watch",
     "build": "tsc"
@@ -19,20 +20,20 @@
   "homepage": "https://github.com/sablelab/pricing-calculator#readme",
   "types": "dist/index.d.ts",
   "devDependencies": {
-    "@types/chai": "^4.1.2",
+    "@types/chai": "^4.1.7",
     "@types/mocha": "^2.2.48",
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "mocha": "^4.1.0",
     "nodemon": "^1.19.1",
     "ts-node": "^3.3.0",
     "xlsx": "^0.11.19"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.104",
-    "@types/node": "^8.9.4",
-    "jsonexport": "^2.0.11",
+    "@types/lodash": "^4.14.134",
+    "@types/node": "^8.10.49",
+    "jsonexport": "^2.4.1",
     "lodash": "^4.17.11",
-    "moment": "^2.21.0",
-    "typescript": "^2.7.2"
+    "moment": "^2.24.0",
+    "typescript": "^2.9.2"
   }
 }
