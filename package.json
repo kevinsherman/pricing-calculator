@@ -23,7 +23,7 @@
     "@types/mocha": "^2.2.48",
     "chai": "^4.1.2",
     "mocha": "^4.1.0",
-    "nodemon": "^1.17.1",
+    "nodemon": "^1.19.1",
     "ts-node": "^3.3.0",
     "xlsx": "^0.11.19"
   },
@@ -31,7 +31,7 @@
     "@types/lodash": "^4.14.104",
     "@types/node": "^8.9.4",
     "jsonexport": "^2.0.11",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.11",
     "moment": "^2.21.0",
     "typescript": "^2.7.2"
   }
