@@ -134,30 +134,30 @@ export function processPlayers(calculatorParameters: CalculatorParameters,
                     case "2B":
                     case "3B":
                     case "1B":
-                        if (player["G_" + positionKey] >= positionCount) {
+                        if (player["g_" + positionKey] >= positionCount) {
                             player.pos.push(positionKey);
                         }
                         break;
                     case "OF":
-                        let lf = player["G_LF"];
-                        let cf = player["G_CF"];
-                        let rf = player["G_RF"];
+                        let lf = player["g_LF"];
+                        let cf = player["g_CF"];
+                        let rf = player["g_RF"];
 
                         if (((lf + cf + rf) >= positionCount) || (cf >= positionCount) || (rf >= positionCount) || (lf >= positionCount)) {
                             player.pos.push(positionKey);
                         }
                         break;
                     case "MI":
-                        let ss = player["G_SS"];
-                        let secondBase = player["G_2B"];
+                        let ss = player["g_SS"];
+                        let secondBase = player["g_2B"];
 
                         if (((ss + secondBase) >= positionCount) || (secondBase >= positionCount) || (ss >= positionCount)) {
                             player.pos.push(positionKey);
                         }
                         break;
                     case "CI":
-                        let firstBase = player["G_1B"];
-                        let thirdBase = player["G_3B"];
+                        let firstBase = player["g_1B"];
+                        let thirdBase = player["g_3B"];
 
                         if (((firstBase + thirdBase) >= positionCount) || (thirdBase >= positionCount) || (firstBase >= positionCount)) {
                             player.pos.push(positionKey);
