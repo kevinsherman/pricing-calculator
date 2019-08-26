@@ -9,7 +9,7 @@ import { battingInput } from '../models/battingInput';
 import { pitchingInput } from '../models/pitchingInput';
 import * as _ from 'lodash';
 import * as c from '../common/constants';
-import { toCsv } from '../common/helpers'; 
+// import { toCsv } from '../common/helpers'; 
 
 export class Calculator {
 
@@ -35,6 +35,7 @@ export class Calculator {
         do {
 
             var i = this.output.numberOfIterations;
+            console.log(this.statType + ' iterations: ' + i);
 
             // Step 1: StandardScores
             this.output.averages.push([]);
@@ -60,9 +61,8 @@ export class Calculator {
                 }
             }
 
-            if (!isSettled) {
-                this.output.numberOfIterations++;
-            }
+            this.output.numberOfIterations++;
+
         } while (!isSettled);
 
         return this.output;
@@ -77,8 +77,8 @@ export class Calculator {
             player.isAboveReplacement = false;
         });
 
-        if (this.statType === "Batting")
-            toCsv(this.players, "before_replacement");
+        // if (this.statType === "Batting")
+        //     toCsv(this.players, "before_replacement");
 
         var filteredPositions = this.input.positions.filter(x => x.value > 0);
 
@@ -107,7 +107,7 @@ export class Calculator {
         // Lastly, just need to set the adjustment and adjusted amount per player...
         filteredPositions.forEach(function (position) {
             var groupToAdjust = _(self.players)
-                .filter(item => (item.chosenPosition === position.key ||  _.includes(item.pos, position.key) && !item.isAboveReplacement))
+                .filter(item => (item.chosenPosition === position.key || _.includes(item.pos, position.key) && !item.isAboveReplacement))
                 .value();
 
             var adjustment: number = replacementLevels[position.key];
@@ -119,8 +119,8 @@ export class Calculator {
 
         })
 
-        if (this.statType === "Batting")
-            toCsv(this.players, "after_adjustment");
+        // if (this.statType === "Batting")
+        //     toCsv(this.players, "after_adjustment");
 
         return replacementLevels;
     }

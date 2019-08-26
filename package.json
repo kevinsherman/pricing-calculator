@@ -1,6 +1,6 @@
 {
   "name": "@sablelab/pricing-calculator",
-  "version": "0.1.3",
+  "version": "0.1.8",
   "description": "Pricing Calculator for Fantasy Baseball using Standard Scores",
   "main": "dist/index.js",
   "scripts": {

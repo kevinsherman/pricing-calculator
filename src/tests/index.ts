@@ -1,5 +1,5 @@
 import { PriceCalculator } from "../index";
-import { toCsv } from "../common/helpers";
+// import { toCsv } from "../common/helpers";
 
 (function testHarness() {
 
@@ -13,6 +13,6 @@ import { toCsv } from "../common/helpers";
     console.log(`Batting Iterations: ${r.battersOutput.numberOfIterations}`);
     console.log(`Pitching Iterations: ${r.pitchersOutput.numberOfIterations}`);
 
-    toCsv(r.hitters, "hitters");
+    // toCsv(r.hitters, "hitters");
 
 })();

@@ -2,9 +2,9 @@ import { CalculatorParameters } from "../models/caclulatorParameters";
 import { playerInput } from "../models/playerInput";
 import * as c from './constants';
 import { statCategory } from "../models/statCategory";
-import * as fs from 'fs';
+// import * as fs from 'fs';
 import * as moment from 'moment';
-const jsonexport = require('jsonexport');
+// const jsonexport = require('jsonexport');
 
 export class KeyValuePair {
     key: string;
@@ -96,17 +96,17 @@ export function processCategories(input: string[], statType: string): statCatego
     return ret;
 }
 
-export function toCsv(input: any[], fileName: string): void {
-    var time = moment(Date.now()).format("HH-mm-ss");
-    var outFile = 'data/output/' + time + "_" + fileName + ".csv";
+// export function toCsv(input: any[], fileName: string): void {
+//     var time = moment(Date.now()).format("HH-mm-ss");
+//     var outFile = 'data/output/' + time + "_" + fileName + ".csv";
 
-    jsonexport(input, function (err: any, csv: any): void {
-        if (err) return console.log(err);
-        fs.writeFile(outFile, csv, function (err) {
-            if (err) console.log(err);
-        });
-    })
-}
+//     // jsonexport(input, function (err: any, csv: any): void {
+//     //     if (err) return console.log(err);
+//     //     // fs.writeFile(outFile, csv, function (err) {
+//     //     //     if (err) console.log(err);
+//     //     // });
+//     // })
+// }
 
 export function processPlayers(calculatorParameters: CalculatorParameters,
     playerInputs: playerInput[],
