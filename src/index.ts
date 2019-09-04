@@ -14,6 +14,8 @@ export class PriceCalculator {
     private pitchers: pitchingInput[];
     private response: CalculatorResponse;
 
+
+
     constructor(calculatorParameters: CalculatorParameters,
         battingInputs: battingInput[],
         pitchingInputs: pitchingInput[]) {
@@ -25,7 +27,7 @@ export class PriceCalculator {
     }
 
     calculate(): CalculatorResponse {
-        
+
         this.calculateZScores();
         this.calculatePricing();
 
@@ -37,19 +39,19 @@ export class PriceCalculator {
         this.response.pitchersOutput = new Calculator(this.pitchers, this.parameters, c.Pitching).calculate();
     }
 
-    private calculatePricing(){
+    private calculatePricing() {
 
         var self = this;
 
         var draftBudget = this.parameters.dollarsPerTeam * this.parameters.numberOfTeams;
-        var totalNumberOfPlayers = this.parameters.hittersInput.numberOfPlayersDrafted + 
+        var totalNumberOfPlayers = this.parameters.hittersInput.numberOfPlayersDrafted +
             this.parameters.pitchersInput.numberOfPlayersDrafted;
 
         var marginalBatters = this.parameters.hittersInput.numberOfPlayersDrafted * this.parameters.minimumBid;
         var marginalPitchers = this.parameters.pitchersInput.numberOfPlayersDrafted * this.parameters.minimumBid
 
         this.batters = _.orderBy(this.batters, (player) => player.adjTotal, ['desc']);
-        this.pitchers = _.orderBy(this.pitchers, (pitcher)=> pitcher.adjTotal, ['desc']);
+        this.pitchers = _.orderBy(this.pitchers, (pitcher) => pitcher.adjTotal, ['desc']);
 
         var totalBattingPoints = _(this.batters).filter(x => x.isAboveReplacement).sumBy(x => x.adjTotal);
         var totalPitchingPoints = _(this.pitchers).filter(x => x.isAboveReplacement).sumBy(x => x.adjTotal);
@@ -69,9 +71,9 @@ export class PriceCalculator {
         }
 
         battingDollars = battingRatio * draftBudget - marginalBatters;
-        pitchingDollars = pitchingRatio * draftBudget - marginalPitchers ;
+        pitchingDollars = pitchingRatio * draftBudget - marginalPitchers;
 
-        this.batters.filter(x=>x.isAboveReplacement).forEach(function (p) {
+        this.batters.filter(x => x.isAboveReplacement).forEach(function (p) {
             var points = p.adjTotal;
             p.dollarValue = (points / totalBattingPoints) * battingDollars + 1;
             points = -p.adjustment;
@@ -79,12 +81,14 @@ export class PriceCalculator {
 
             self.parameters.hittersInput.statCategories.forEach(cat => {
                 points = p[cat.zScoreName];
-                p[cat.name + "_sal"] = (points/totalBattingPoints) * battingDollars;
+                p[cat.name + "_sal"] = (points / totalBattingPoints) * battingDollars;
             });
         });
 
         this.response.hitters = this.batters;
-        
+        this.response.battingRatio = battingRatio;
+        this.response.pitchingRatio = pitchingRatio;
+
         this.pitchers.forEach(function (p) {
             var points = p.adjTotal;
             p.dollarValue = (points / totalPitchingPoints) * pitchingDollars + 1;
@@ -93,7 +97,7 @@ export class PriceCalculator {
 
             self.parameters.pitchersInput.statCategories.forEach(cat => {
                 points = p[cat.zScoreName];
-                p[cat.name + "_sal"] = (points/totalPitchingPoints) * pitchingDollars;
+                p[cat.name + "_sal"] = (points / totalPitchingPoints) * pitchingDollars;
             });
         });
 
